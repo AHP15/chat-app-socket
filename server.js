@@ -11,14 +11,15 @@ import cors from "cors";
 dotenv.config();
 
 const corOption = {
-  origin: ["https://kalam-app.herokuapp.com/"]
+  origin: ["https://kalam-app.herokuapp.com"]
 }
 const app = express();
 app.use(cors(corOption));
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-      origin: "https://kalam-app.herokuapp.com/",
+      origin: "https://kalam-app.herokuapp.com",
+      allowedHeaders: ["Access-Control-Allow-Origin"],
       credentials: true
     }
 });
