@@ -13,13 +13,10 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-      origin: "https://kalam-socket.herokuapp.com"
+      origin: "https://kalam-app.herokuapp.com"
     }
 });
 
-app.get("/", (req, res) =>{
-  res.send({message:"hello from socket app"})
-});
 
 let Chat;
 mongoose.connect(process.env.CONNECTION_URL)
