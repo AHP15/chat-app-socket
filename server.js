@@ -6,14 +6,19 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import BSON from "bson";
 import { v4 as uuidv4 } from "uuid";
+import cors from "cors";
 
 dotenv.config();
 
+const corOption = {
+  origin: "https://kalam-app.herokuapp.com/"
+}
 const app = express();
+app.use(cors(corOption));
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-      origin: "https://kalam-app.herokuapp.com"
+      origin: "https://kalam-app.herokuapp.com/"
     }
 });
 
