@@ -18,9 +18,7 @@ app.use(cors(corOption));
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-      origin: "https://kalam-app.herokuapp.com",
-      allowedHeaders: ["Access-Control-Allow-Origin"],
-      credentials: true
+      origin: ["https://kalam-app.herokuapp.com"],
     }
 });
 
