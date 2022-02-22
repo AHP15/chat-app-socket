@@ -1,23 +1,31 @@
 import { Server } from "socket.io";
+import express from "express";
+import { createServer } from "http";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import BSON from "bson";
 import { v4 as uuidv4 } from "uuid";
+import cors from "cors";
 
 
 dotenv.config();
 
-const io = new Server({ 
-  cors: {
-    origin: ["https://kalam-app.herokuapp.com", "http://localhost:3000"],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Access-Control-Allow-Origin']
-  }
+const corsOptions = {
+  origin: ["https://kalam-app.herokuapp.com", "http://localhost:3000"],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Access-Control-Allow-Origin']
+};
+
+const app = express();
+app.use(cors(corsOptions));
+const httpServer = createServer(app);
+const io = new Server(httpServer,{ 
+  cors:corsOptions
 });
 
-io.of("/", () =>{
-  io.send({message: "hello from socket"});
+app.get("/", (req, res) =>{
+  res.send("Hello from socket app")
 })
 
 let Chat;
@@ -95,4 +103,6 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen(4000);
+httpServer.listen(3000, () =>{
+  console.log("listening on port 3000");
+});
