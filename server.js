@@ -26,7 +26,11 @@ const io = new Server(httpServer,{
 
 app.get("/", (req, res) =>{
   res.send("Hello from socket app")
-})
+});
+
+io.of("/", () =>{
+  console.log("Hello from socket app")
+});
 
 let Chat;
 mongoose.connect(process.env.CONNECTION_URL)
@@ -106,3 +110,9 @@ io.on("connection", (socket) => {
 httpServer.listen(3000, () =>{
   console.log("listening on port 3000");
 });
+
+/*
+app.listen(4000, () =>{
+  console.log("listening on port 4000");
+});
+*/
