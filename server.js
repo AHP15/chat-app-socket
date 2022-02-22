@@ -1,29 +1,20 @@
-import express from "express";
-import { createServer } from "http";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import BSON from "bson";
 import { v4 as uuidv4 } from "uuid";
-import cors from "cors";
+
 
 dotenv.config();
 
-const corOption = {
-  origin: "*",
-  methods:["GET"]
-}
-const app = express();
-app.use(cors(corOption));
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
-    cors: {
-      origin: "*",
-      methods:["GET"]
-    }
-});
 
+const io = new Server({ 
+  cors: {
+    origin: ["https://kalam-app.herokuapp.com", "http://localhost:3000"],
+    methods:["GET"]
+  }
+});
 
 let Chat;
 mongoose.connect(process.env.CONNECTION_URL)
@@ -100,6 +91,6 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(4000, () =>{
+io.listen(4000, () =>{
   console.log("server listening on port 4000");
 });
