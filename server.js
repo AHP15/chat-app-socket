@@ -8,13 +8,17 @@ import { v4 as uuidv4 } from "uuid";
 
 dotenv.config();
 
-
-const io = new Server({ 
-  cors: {
+/*
+cors: {
     origin: ["https://kalam-app.herokuapp.com", "http://localhost:3000"],
     methods: ["GET", "POST"],
   }
+*/
+const io = new Server({ 
 });
+io.of("/", () =>{
+  io.send({message: "hello from socket"});
+})
 
 let Chat;
 mongoose.connect(process.env.CONNECTION_URL)
@@ -91,6 +95,4 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen(4000, () =>{
-  console.log("server listening on port 4000");
-});
+io.listen(4000);
