@@ -8,14 +8,14 @@ import { v4 as uuidv4 } from "uuid";
 
 dotenv.config();
 
-/*
-cors: {
-    origin: ["https://kalam-app.herokuapp.com", "http://localhost:3000"],
-    methods: ["GET", "POST"],
-  }
-*/
 const io = new Server({ 
+  cors: {
+    origin: ["https://kalam-app.herokuapp.com", "http://localhost:3000"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Access-Control-Allow-Origin']
+  }
 });
+
 io.of("/", () =>{
   io.send({message: "hello from socket"});
 })
