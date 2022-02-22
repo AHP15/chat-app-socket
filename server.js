@@ -11,7 +11,8 @@ import cors from "cors";
 dotenv.config();
 
 const corOption = {
-  origin: "*"
+  origin: "*",
+  methods:["GET"]
 }
 const app = express();
 app.use(cors(corOption));
