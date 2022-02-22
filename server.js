@@ -14,7 +14,6 @@ dotenv.config();
 const corsOptions = {
   origin: ["https://kalam-app.herokuapp.com", "http://localhost:3000"],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Access-Control-Allow-Origin']
 };
 
 const app = express();
