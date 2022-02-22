@@ -12,7 +12,6 @@ dotenv.config();
 const io = new Server({ 
   cors: {
     origin: ["https://kalam-app.herokuapp.com", "http://localhost:3000"],
-    methods:["GET"]
   }
 });
 
